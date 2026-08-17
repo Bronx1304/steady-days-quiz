@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Which Rebuild Are You In? | Steady Days</title>
+<style>
+  :root{
+    --cream:#faf6ee; --sage:#8ba888; --clay:#c17a5e; --gold:#d4a24c;
+    --navy:#1a2744; --brick:#a94438; --emerald:#2f6e5c; --teal:#3f7f80;
+    --ink:#2b2620; --paper:#fffdf8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:'Corbel','Segoe UI',sans-serif; background:var(--cream);
+    color:var(--ink); display:flex; justify-content:center; padding:32px 16px;
+  }
+  .card{
+    max-width:640px; width:100%; background:var(--paper); border-radius:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08); padding:40px 32px; position:relative;
+  }
+  .eyebrow{
+    text-transform:uppercase; letter-spacing:2px; font-size:12px; color:var(--clay);
+    font-weight:700; margin-bottom:8px;
+  }
+  h1{
+    font-family:Georgia,serif; font-size:28px; margin:0 0 12px; color:var(--navy);
+  }
+  p.lead{ font-size:16px; line-height:1.5; color:#55503f; margin-bottom:28px; }
+  .progress{
+    height:6px; background:#eee6d6; border-radius:3px; overflow:hidden; margin-bottom:28px;
+  }
+  .progress-bar{ height:100%; background:var(--gold); width:0%; transition:width .3s ease; }
+  .question{ display:none; }
+  .question.active{ display:block; animation:fade .3s ease; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+  .q-title{ font-size:19px; font-weight:700; margin-bottom:18px; color:var(--ink); }
+  .option{
+    display:block; width:100%; text-align:left; padding:16px 18px; margin-bottom:12px;
+    border:2px solid #e7ddc8; border-radius:10px; background:#fff; cursor:pointer;
+    font-size:15px; color:var(--ink); transition:border-color .15s, background .15s;
+  }
+  .option:hover{ border-color:var(--sage); background:#f4f7f2; }
+  .result{ display:none; }
+  .result.active{ display:block; animation:fade .4s ease; }
+  .result-badge{
+    display:inline-block; padding:6px 14px; border-radius:20px; font-size:13px;
+    font-weight:700; margin-bottom:14px; color:#fff;
+  }
+  .badge-routine{ background:var(--sage); }
+  .badge-money{ background:var(--navy); }
+  .gate{ margin-top:20px; padding-top:20px; border-top:1px solid #eee6d6; }
+  .gate label{ display:block; font-size:14px; font-weight:600; margin-bottom:8px; }
+  .gate input[type=email]{
+    width:100%; padding:13px 14px; border:2px solid #e7ddc8; border-radius:8px;
+    font-size:15px; margin-bottom:14px;
+  }
+  .cta{
+    display:inline-block; width:100%; text-align:center; padding:15px 20px;
+    background:var(--clay); color:#fff; border:none; border-radius:8px;
+    font-size:16px; font-weight:700; cursor:pointer; text-decoration:none;
+  }
+  .cta.money{ background:var(--navy); }
+  .cta:hover{ opacity:.92; }
+  .fine{ font-size:12px; color:#8a8371; margin-top:10px; text-align:center; }
+  .back-link{ font-size:13px; color:#8a8371; text-decoration:underline; cursor:pointer; margin-top:16px; display:inline-block; }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div class="eyebrow">Steady Days · Quick Quiz</div>
+  <h1 id="headline">Which Rebuild Are You In?</h1>
+  <p class="lead" id="subhead">Two questions. We'll match you with the free printable that fits the rebuild you're actually in right now — routine, or money.</p>
+
+  <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+  <!-- Question 1 -->
+  <div class="question active" data-q="1">
+    <div class="q-title">1. What does a genuinely hard Tuesday look like for you right now?</div>
+    <button class="option" data-score="routine">A meltdown, a missed transition, or a routine that fell apart before 9am.</button>
+    <button class="option" data-score="money">Checking the account balance before you buy anything, even coffee.</button>
+    <button class="option" data-score="routine">Trying to keep a teen regulated through a day that has zero structure.</button>
+    <button class="option" data-score="money">Moving money between things to cover a bill that's due before payday.</button>
+  </div>
+
+  <!-- Question 2 -->
+  <div class="question" data-q="2">
+    <div class="q-title">2. If one thing got easier this month, what would move the needle most?</div>
+    <button class="option" data-score="routine">A visual plan that actually holds up when the day goes sideways.</button>
+    <button class="option" data-score="money">A real number for where the money's actually going.</button>
+    <button class="option" data-score="routine">Fewer meltdowns, or at least ones we can see coming.</button>
+    <button class="option" data-score="money">A debt or savings plan I can actually stick to.</button>
+  </div>
+
+  <!-- Result: Routine -->
+  <div class="result" id="result-routine">
+    <span class="result-badge badge-routine">Your Rebuild: The Routine Rebuild</span>
+    <h1>You're rebuilding the routine.</h1>
+    <p class="lead">Same problem I started with — most planners are either baby-visual-schedule cute or generic-adult-planner boring, and neither survives an actual hard Tuesday. Here's a free page from the system built for that, made by a parent who's lived it.</p>
+    <div class="gate">
+      <label for="email-routine">Where should we send your free Daily Routine Chart sample?</label>
+      <form action="https://assets.mailerlite.com/jsonp/2579897/forms/196031643465549657/subscribe" method="POST" target="ml_hidden_iframe" onsubmit="return showDelivery('routine')">
+        <input type="hidden" name="ml-submit" value="1">
+        <input type="hidden" name="anticsrf" value="true">
+        <input type="email" id="email-routine" name="fields[email]" placeholder="you@email.com" required>
+        <button type="submit" class="cta">Send Me the Free Sample</button>
+      </form>
+      <p class="fine">Check your inbox to confirm — then your sample and a short series on the routine rebuild are on the way. Unsubscribe anytime.</p>
+    </div>
+    <span class="back-link" onclick="restartQuiz()">← Retake the quiz</span>
+  </div>
+
+  <!-- Result: Money -->
+  <div class="result" id="result-money">
+    <span class="result-badge badge-money">Your Rebuild: The Money Rebuild</span>
+    <h1>You're rebuilding the money.</h1>
+    <p class="lead">Paycheck to paycheck, digging out, trying to save when there's nothing left by the end of the month — built by someone who's actually had to stretch a paycheck to make rent, not a template farm. Here's a free page from that system.</p>
+    <div class="gate">
+      <label for="email-money">Where should we send your free Monthly Budget Planner sample?</label>
+      <form action="https://assets.mailerlite.com/jsonp/2579897/forms/196031718300321573/subscribe" method="POST" target="ml_hidden_iframe" onsubmit="return showDelivery('money')">
+        <input type="hidden" name="ml-submit" value="1">
+        <input type="hidden" name="anticsrf" value="true">
+        <input type="email" id="email-money" name="fields[email]" placeholder="you@email.com" required>
+        <button type="submit" class="cta money">Send Me the Free Sample</button>
+      </form>
+      <p class="fine">Check your inbox to confirm — then your sample and a short series on the money rebuild are on the way. Unsubscribe anytime.</p>
+    </div>
+    <span class="back-link" onclick="restartQuiz()">← Retake the quiz</span>
+  </div>
+
+  <!-- Delivery confirmation (shown after form "submit" in preview; real delivery happens via ESP automation) -->
+  <div class="result" id="delivery-confirm">
+    <span class="result-badge badge-routine" id="delivery-badge">Check Your Inbox</span>
+    <h1>Your free sample is on its way.</h1>
+    <p class="lead" id="delivery-copy">It should land in the next couple minutes — check spam if you don't see it. While you wait, the full collection is live on Etsy.</p>
+    <a href="https://www.etsy.com/shop/SteadyRootsShop" class="cta" id="delivery-cta">Browse the Shop on Etsy</a>
+  </div>
+
+</div>
+
+<!-- Submission target so the MailerLite POST doesn't navigate away from
+     the quiz or pop a new tab — response body is unused, we drive the
+     confirmation state ourselves via JS in showDelivery(). -->
+<iframe name="ml_hidden_iframe" style="display:none" title="form submission target"></iframe>
+
+<script>
+let currentQ = 1;
+const totalQ = 2;
+let scores = { routine: 0, money: 0 };
+
+document.querySelectorAll('.question .option').forEach(btn => {
+  btn.addEventListener('click', () => {
+    scores[btn.dataset.score]++;
+    if (currentQ < totalQ) {
+      document.querySelector(`.question[data-q="${currentQ}"]`).classList.remove('active');
+      currentQ++;
+      document.querySelector(`.question[data-q="${currentQ}"]`).classList.add('active');
+      updateProgress();
+    } else {
+      showResult();
+    }
+  });
+});
+
+function updateProgress(){
+  const pct = (currentQ - 1) / totalQ * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+function showResult(){
+  document.querySelector(`.question[data-q="${currentQ}"]`).classList.remove('active');
+  document.getElementById('progressBar').style.width = '100%';
+  const winner = scores.routine >= scores.money ? 'routine' : 'money';
+  document.getElementById(`result-${winner}`).classList.add('active');
+}
+
+function showDelivery(segment){
+  // Lets the real POST fire (to the hidden iframe, so it doesn't navigate
+  // the page or open a new tab), then swaps in the confirmation panel.
+  // MailerLite double opt-in is ON for both forms: the visitor must click
+  // a confirmation link in their inbox before they're actually subscribed
+  // and the automation sequence starts — copy reflects that, not instant delivery.
+  document.getElementById(`result-${segment}`).classList.remove('active');
+  const badge = document.getElementById('delivery-badge');
+  const copy = document.getElementById('delivery-copy');
+  if(segment === 'routine'){
+    badge.className = 'result-badge badge-routine';
+    copy.textContent = "Check your inbox for a confirmation email — click it, and your free Daily Routine Chart sample plus the full Routine series lands right after. Check spam if you don't see it within a few minutes.";
+  } else {
+    badge.className = 'result-badge badge-money';
+    copy.textContent = "Check your inbox for a confirmation email — click it, and your free Monthly Budget Planner sample plus the full Money series lands right after. Check spam if you don't see it within a few minutes.";
+  }
+  document.getElementById('delivery-confirm').classList.add('active');
+  return true; // allow the real MailerLite submission to go through
+}
+
+function restartQuiz(){
+  document.querySelectorAll('.result').forEach(r => r.classList.remove('active'));
+  document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+  currentQ = 1;
+  scores = { routine: 0, money: 0 };
+  document.querySelector('.question[data-q="1"]').classList.add('active');
+  document.getElementById('progressBar').style.width = '0%';
+}
+</script>
+</body>
+</html>

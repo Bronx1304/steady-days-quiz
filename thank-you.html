@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check Your Inbox | Steady Days</title>
+<style>
+  :root{ --cream:#faf6ee; --sage:#8ba888; --navy:#1a2744; --clay:#c17a5e; }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:'Corbel','Segoe UI',sans-serif; background:var(--cream);
+    color:#2b2620; display:flex; justify-content:center; padding:64px 24px;
+  }
+  .card{ max-width:560px; text-align:center; }
+  .badge{
+    display:inline-block; padding:6px 16px; border-radius:20px; font-size:13px;
+    font-weight:700; margin-bottom:18px; color:#fff; background:var(--sage);
+  }
+  .badge.money{ background:var(--navy); }
+  h1{ font-family:Georgia,serif; font-size:30px; margin:0 0 16px; color:var(--navy); }
+  p{ font-size:16px; line-height:1.6; color:#55503f; margin-bottom:28px; }
+  .cta{
+    display:inline-block; padding:15px 32px; background:var(--clay); color:#fff;
+    border-radius:8px; font-size:16px; font-weight:700; text-decoration:none;
+  }
+  .fine{ font-size:13px; color:#8a8371; margin-top:16px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <span class="badge" id="badge">Check Your Inbox</span>
+  <h1 id="headline">Your free sample is on its way.</h1>
+  <p id="copy">It should land in the next couple minutes — check spam if you don't see it. While you wait, the full collection is live on Etsy.</p>
+  <a href="https://www.etsy.com/shop/SteadyRootsShop" class="cta" id="cta-link">Browse the Shop on Etsy</a>
+  <p class="fine">Questions? Just reply to the email — it comes straight to me, not a no-reply inbox.</p>
+</div>
+
+<script>
+  // Segment is passed as a URL query param by the ESP redirect after
+  // form submit, e.g. thank-you.html?segment=routine or ?segment=money
+  const params = new URLSearchParams(window.location.search);
+  const segment = params.get('segment');
+
+  if (segment === 'money') {
+    document.getElementById('badge').textContent = 'Check Your Inbox';
+    document.getElementById('badge').className = 'badge money';
+    document.getElementById('headline').textContent = 'Your Monthly Budget Planner sample is on its way.';
+    document.getElementById('copy').textContent =
+      "It should land in the next couple minutes — check spam if you don't see it. While you wait, the full Steady Ledger collection is live on Etsy.";
+    document.getElementById('cta-link').href = 'https://www.etsy.com/listing/4553615201/financial-planner-bundle-budget-debt';
+  } else if (segment === 'routine') {
+    document.getElementById('headline').textContent = 'Your Daily Routine Chart sample is on its way.';
+    document.getElementById('copy').textContent =
+      "It should land in the next couple minutes — check spam if you don't see it. While you wait, the full AuDHD Teen Daily Support collection is live on Etsy.";
+    document.getElementById('cta-link').href = 'https://www.etsy.com/listing/4553606181/audhd-teen-daily-planner-bundle-routine';
+  }
+</script>
+</body>
+</html>
